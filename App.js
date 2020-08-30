@@ -3,7 +3,13 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from './components/Header/Header';
 import Add from './components/Add/Add';
+import Search from './components/Search/Search';
+import Status from './components/Status/Status';
+import TodoList from './components/List/List';
 
+const Separator = () => (
+  <View style={styles.separator} />
+);
 
 export default class App extends Component {
 
@@ -111,7 +117,19 @@ export default class App extends Component {
       <View style={styles.container}>
         <Header toDo={toDoCount} done={doneCount} />
         <Add onItemAdded={this.onItemAdded} />
-        
+        <View style={styles.ss}>
+          <Search onSearchChange={this.onSearchChange}/>
+          <Status
+              filter={filter}
+              onFilterChange={this.onFilterChange} />
+        </View>
+        <Separator />
+
+        <TodoList
+          items={ visibleItems }
+          onToggleImportant={this.onToggleImportant}
+          onToggleDone={this.onToggleDone}
+          onDelete={this.onDelete} />
         <StatusBar style="auto" />
       </View>
     );
@@ -125,5 +143,15 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingLeft:30,
     paddingRight: 30
+  },
+  ss: {
+    marginTop: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: '#737373',
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
 });

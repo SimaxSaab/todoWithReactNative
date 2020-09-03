@@ -3,8 +3,6 @@ import {TextInput, Button, View, StyleSheet} from 'react-native';
 
 import Item from './Item/Item';
 
-import t from './List.module.css';
-
 const TodoList = ({ items, onToggleImportant, onToggleDone, onDelete }) => {
 
   const elements = items.map((item) => {

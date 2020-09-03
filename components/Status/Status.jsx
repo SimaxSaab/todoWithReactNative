@@ -18,7 +18,7 @@ const Status = ({filter, onFilterChange = () => {}}) => {
         <Button  
                 key={name}
                 
-                onClick={() => onFilterChange(name)}
+                onPress={() => onFilterChange(name)}
                 
                 title={label} />
       </View>

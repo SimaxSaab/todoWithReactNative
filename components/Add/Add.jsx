@@ -44,7 +44,7 @@ const a = StyleSheet.create({
     justifyContent: 'space-between'
   },
   textInputControl: {
-    // width: '70%',
+    width: '70%',
     borderStyle: 'solid',
     borderColor: '#ccc',
     borderWidth: 2,

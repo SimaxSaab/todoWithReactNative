@@ -1,36 +1,37 @@
-import React, {Component} from 'react';
+import React, { Component }  from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faExclamation, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Text, Button, View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { ViewModal } from './Modal/ViewModal';
 
 // const Item = ({ important, done,
 //       label, onToggleImportant, onToggleDone, onDelete }) => {
 
 export default class Item extends Component {
 
+  state = {
+    modal: false
+  };
 
+  onViewModal = () => {
+    // const {onSearchChange = () => {}} = this.props;
+    this.setState({
+      modal: true
+    });
 
-  //   constructor(props) {
-  //     super(props);
-  // };          
-  // let classNames = t.item;
-  // if (important) {
-  //   classNames += ' ' + t.important;
-  // }
+    // onSearchChange(e.target.value);
+  };
 
-  // if (done) {
-  //   classNames += ' ' + t.done;
-  // }
-
-  // colorStyles = {
-  //   сolor: impColor()
-  // };
-
-
+  onCancel = () => {
+    this.setState({
+      modal: false
+    })
+  }
 
   impColor = () => {
-    const { important, done, label, onToggleImportant, onToggleDone, onDelete } = this.props;
+    const { important } = this.props;
 
     if (important) return 'steelblue';
     return '#888';
@@ -44,32 +45,22 @@ export default class Item extends Component {
   }
 
   render() {
-    const { important, done, label, onToggleImportant, onToggleDone, onDelete } = this.props;
+    const { label, onToggleImportant, onToggleDone, onDelete } = this.props;
     return (
       <View style={item.item}>
+        
+        <ViewModal visible={this.state.modal} onCancel={this.onCancel} />
+        {/* <TouchableOpacity style={item.itemBut} > */}
         <Text
           style={[item.itemLabel, {color: this.impColor(), textDecorationLine: this.doneDecor()}]}
-          onPress={onToggleDone}>{label}</Text>
-
-        {/* <button type="button"
-              className="btn btn-outline-success btn-sm float-right"
-              onClick={onToggleImportant}>
-        {/* <i className="fa fa-exclamation"></i> 
-        <FontAwesomeIcon icon={ faExclamation } color={'red'} />
-      </button> */}
-
+          onPress={onToggleDone} onLongPress={this.onViewModal}>{label}</Text>
+{/* </TouchableOpacity> */}
         <Icon.Button style={[item.exc, item.gen]} name="exclamation" color="red" onPress={onToggleImportant}>
         </Icon.Button>
 
         <Icon.Button style={[item.trash, item.gen]} name="trash" color="green" onPress={onDelete}>
         </Icon.Button>
-
-        {/* <button type="button"
-              className="btn btn-outline-danger btn-sm float-right"
-              onClick={onDelete}>
-        {/* <i className="fa fa-trash-o"></i> 
-        <FontAwesomeIcon icon={ faTrash } color={'green'} />
-      </button> */}
+        
       </View>
     );
   };
@@ -87,20 +78,22 @@ const item = StyleSheet.create({
   },
   itemLabel: {
     color: '#ccc',
-    width: '70%',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    width: '65%'
   },
   gen: {
     backgroundColor: '#fff',
     borderStyle: 'solid',
     borderColor: '#ccc',
     borderWidth: 2,
+    width: 45
   },
   exc: {   
-    marginRight: -8
+    paddingLeft: 16
   },
   trash: {
-    marginRight: -8
+    paddingLeft: 12,
+    marginRight: 0
   }
 });
 

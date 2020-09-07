@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {TextInput, Button, View, StyleSheet} from 'react-native';
+import {TextInput, Button, View, StyleSheet, Alert} from 'react-native';
 
 export default class Add extends Component {
 
@@ -14,10 +14,15 @@ export default class Add extends Component {
   };
 
   onSubmit = (e) => {
+    
     const { label } = this.state;
     this.setState({ label: '' });
-    const cb = this.props.onItemAdded || (() => {});
-    cb(label);
+    if (this.state.label.trim()) {
+      const cb = this.props.onItemAdded || (() => {});
+      cb(label);
+    } else {
+      Alert.alert('Дело не может быть пустым!');
+    }
   };
 
   render() {
@@ -40,6 +45,7 @@ export default class Add extends Component {
 
 const a = StyleSheet.create({
   addPanel: {
+    marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },

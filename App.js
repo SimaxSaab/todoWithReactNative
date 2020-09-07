@@ -70,6 +70,10 @@ export default class App extends Component {
     });
   };
 
+  onViewModal = (id) => {
+
+  };
+
   onFilterChange = (filter) => {
     this.setState({ filter });
   };
@@ -129,7 +133,8 @@ export default class App extends Component {
           items={ visibleItems }
           onToggleImportant={this.onToggleImportant}
           onToggleDone={this.onToggleDone}
-          onDelete={this.onDelete} />
+          onDelete={this.onDelete}
+          onViewModal={this.onViewModal} />
         <StatusBar style="auto" />
       </View>
     );
@@ -140,12 +145,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingVertical: 20,
-    paddingLeft:30,
-    paddingRight: 30
+    paddingVertical: 30,
+    paddingLeft:20,
+    paddingRight: 20
   },
   ss: {
-    marginTop: 5,
+    marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },

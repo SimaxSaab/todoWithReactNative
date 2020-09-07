@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {TextInput, Button, View, StyleSheet} from 'react-native';
 
 const filterButtons = [
@@ -7,17 +7,28 @@ const filterButtons = [
   { name: 'done', label: 'Done' }
 ];
 
-const Status = ({filter, onFilterChange = () => {}}) => {
+// const Status = ({filter, onFilterChange = () => {}}) => {
 
+  export default class Status extends Component {
+
+    backC= (name) => {
+      const {filter} = this.props;
+      const isActive = name === filter;
+      if (isActive) return '#888';
+    }
+
+render() {
+  const {filter, onFilterChange} = this.props;
   const buttons = filterButtons.map(({name, label}) => {
+    
     // const isActive = name === filter;
     // const classNames = 'btn ' + (isActive ? 'btn-info' : 'btn-outline-secondary');
 
     return (
-      <View style={status.butItem}>
-        <Button  
-                key={name}
-                
+      <View style={status.butItem} key={name}>
+        <Button  style={{backgroundColor: this.backC()}}
+                // key={name}
+                color={this.backC(name)}
                 onPress={() => onFilterChange(name)}
                 
                 title={label} />
@@ -31,6 +42,7 @@ const Status = ({filter, onFilterChange = () => {}}) => {
     </View>
   );
 };
+}
 
 const status = StyleSheet.create({
   butContainer: {
@@ -39,8 +51,9 @@ const status = StyleSheet.create({
     
   },
   butItem: {
-    marginRight: 3
+    marginRight: 10
+
   }
 });
 
-export default Status;
+// export default Status;
